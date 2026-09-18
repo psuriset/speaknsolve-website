@@ -37,6 +37,9 @@ const navItems = [
   'Admin',
 ];
 
+const whatsappUrl =
+  "https://wa.me/919880964672?text=Hello%20SpeakNSolve%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20courses.";
+
 const courses = [
   {
     name: 'Confident Speaking',
@@ -158,13 +161,19 @@ function SectionHeading({
 function ActionButton({
   children,
   variant = 'primary',
+  href = '#demo',
 }: {
   children: React.ReactNode;
   variant?: 'primary' | 'light' | 'outline';
+  href?: string;
 }) {
+  const isExternal = href.startsWith('https://');
+
   return (
     <a
-      href="#demo"
+      href={href}
+      target={isExternal ? '_blank' : undefined}
+      rel={isExternal ? 'noreferrer' : undefined}
       className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-bold transition ${
         variant === 'primary'
           ? 'bg-ink text-white shadow-[0_12px_30px_rgba(17,24,39,0.22)] hover:bg-slate-800'
@@ -226,7 +235,9 @@ export default function Home() {
           </div>
           <div className="flex items-center gap-2">
             <a
-              href="https://wa.me/10000000000"
+              href={whatsappUrl}
+              target="_blank"
+              rel="noreferrer"
               className="hidden size-11 items-center justify-center rounded-md border border-teal/30 bg-white text-teal sm:flex"
               aria-label="WhatsApp SpeakNSolve"
             >
@@ -479,7 +490,9 @@ export default function Home() {
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <ActionButton variant="light">Confirm Demo</ActionButton>
-                <ActionButton variant="outline">WhatsApp Us</ActionButton>
+                <ActionButton variant="outline" href={whatsappUrl}>
+                  WhatsApp Us
+                </ActionButton>
               </div>
             </div>
             <form className="grid gap-4 bg-white p-6 md:grid-cols-2 md:p-8">
@@ -689,7 +702,9 @@ export default function Home() {
       </section>
 
       <a
-        href="https://wa.me/10000000000"
+        href={whatsappUrl}
+        target="_blank"
+        rel="noreferrer"
         aria-label="Contact SpeakNSolve on WhatsApp"
         className="fixed bottom-5 right-5 z-50 flex size-14 items-center justify-center rounded-full bg-teal text-white shadow-2xl"
       >
